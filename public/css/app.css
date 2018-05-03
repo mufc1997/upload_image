@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Slab');
+.container-login {
+    height:100vh;
+    width: 100%;    
+}
+
+.container-form {
+    padding: 50px 40px;
+    width: 450px;
+    height: 500px;
+    box-shadow: -1px 1px 5px 1px #bbbbbb;
+}
+
+.title-logo {
+    color: royalblue;
+    font-size: 30px;
+    font-family: 'Roboto Slab', serif;
+}
+
+.border-hidden {
+    border-radius: 0;
+}
+
+.input-config {
+    border-radius: 0;
+}
+
+.wrap-homepage { 
+    background: #f3f3f2;
+}
+
+.home-header {
+    box-shadow: -1px 1px 5px 1px #bbbbbb;
+    background-color: white;
+}
+
+.nav-config-bg {
+    padding-right: 100px;
+    padding-left: 40px;
+    background-color: white;
+}
+
+.navbar-brand-size {
+    font-size: 30px;
+    font-family: 'Roboto Slab', serif;
+}
+
+.add-aside {
+    padding: 10px 0 5px;
+    background-color: white;
+}
+
+.add-aside ul{
+    list-style-type: none;
+}
+
+.search-homepage {
+    width: 500px;
+}
+
+.task {
+    flex-basis: 100px;
+}
+
+.task1 {
+    flex: 1;
+}
+
+.add-button {
+    width: 100px;
+    height:35px;
+}
+
+.table-wrap {
+    background-color: white;
+    margin: 50px 100px;
+    padding: 20px;
+    box-shadow: -1px 1px 5px 1px #bbbbbb;
+}
+
+.form-add-project {
+    padding: 50px;
+}
