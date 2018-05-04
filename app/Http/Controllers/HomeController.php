@@ -18,6 +18,9 @@ class HomeController extends Controller
             $files = File::whereNull('parent_id')->get();
             return view('home', compact("files"));  
         } else {
+            if($project == 'admin') {
+                return view('admin');
+            }
             $find = File::where('name', $project)->get()->toArray();
             $files = File::where('parent_id', $find[0]['id'])->get();
             return view('home', compact("files"));

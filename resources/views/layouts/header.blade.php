@@ -15,7 +15,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <article class="d-flex justify-content-center">
-                        <form class="form-add-project d-flex flex-column justify-content-center" id="fileForm" action="{{ url('upload') }}" enctype="multipart/form-data" method="post">
+                        <form class="form-add-project d-flex flex-column justify-content-center" id="fileForm" action="{{ route('upload') }}" enctype="multipart/form-data" method="post">
                             {{ csrf_field() }}
                             <?php 
                                 $url_arr = explode("/", url()->current());
@@ -38,7 +38,9 @@
         <button type="button" class="btn btn-primary border-hidden add-button" data-toggle="modal" data-target="#projectModal" onClick="uploadProject();">
             Add Project
         </button>
-
+        <a class="btn btn-primary border-hidden add-button" href="{{ route('admin') }}">
+            Chage Password
+        </a>
         <!-- Modal -->
         <div class="modal fade" id="projectModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">

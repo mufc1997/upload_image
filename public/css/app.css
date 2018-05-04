@@ -67,7 +67,6 @@
 }
 
 .add-button {
-    width: 100px;
     height:35px;
 }
 
@@ -80,4 +79,10 @@
 
 .form-add-project {
     padding: 50px;
+}
+
+.container-form-admin {
+    padding: 50px 40px;
+    width: 450px;
+    box-shadow: -1px 1px 5px 1px #bbbbbb;
 }
