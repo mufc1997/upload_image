@@ -130,15 +130,22 @@ class FileController extends Controller
 
     public function deleteProject($id) {
         $files = File::where('parent', $id)->get()->toArray();
+        $this->deleteFolder($files);
+        File::find($id)->delete();
+        return redirect()->route('home');
+    }
+
+    public function deleteFolder($files) {
         foreach($files as $file) {
             if($file['extension'] != "folder") {
                 Storage::disk('spaces')->delete($file['path']);
                 File::find($file['id'])->delete();
             } else {
+                $f = File::where('parent', $file['id'])->get()->toArray();
+                if($f != null)
+                    $this->deleteFolder($f);
                 File::find($file['id'])->delete();
             }
         }
-        File::find($id)->delete();
-        return redirect()->route('home');
     }
 }
