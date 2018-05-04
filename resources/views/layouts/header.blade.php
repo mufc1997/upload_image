@@ -20,7 +20,7 @@
                             <?php 
                                 $url_arr = explode("/", url()->current());
                                 $project = $url_arr[count($url_arr) - 1];
-                                if($project == "shop.localhost")
+                                if($project == $url_arr[2])
                                     $project = null;
                             ?>
                             <input type="text" value="{{ $project }}" name="path" hidden>
@@ -49,7 +49,7 @@
                             <?php 
                                 $url_arr = explode("/", url()->current());
                                 $project = $url_arr[count($url_arr) - 1];
-                                if($project == "shop.localhost")
+                                if($project == $url_arr[2])
                                     $project = null;
                             ?>
                             <input type="text" value="{{ $project }}" name="path" hidden>

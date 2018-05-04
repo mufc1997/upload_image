@@ -1,23 +1,25 @@
+var url = window.location.origin;
 var editFile = function(id) {
     $('#fileForm').attr({
-        action: `http://shop.localhost/edit/${id}`
+        action: `${url}/edit/${id}`
     });
 }
 
 var editProject = function(id) {
+    console.log();
     $('#projectForm').attr({
-        action: `http://shop.localhost/editProject/${id}`
+        action: `${url}/editProject/${id}`
     });
 }
 
 var uploadFile = function(id) {
     $('#fileForm').attr({
-        action: `http://shop.localhost/upload`
+        action: `${url}/upload`
     });
 }
 
 var uploadProject = function() {
     $('#projectForm').attr({
-        action: `http://shop.localhost/addproject`
+        action: `${url}/addproject`
     });
 }
