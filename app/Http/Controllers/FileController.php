@@ -31,13 +31,13 @@ class FileController extends Controller
         if($path_add_file != null) {
             do {
                 $element = File::where('name', $path)->get()->toArray();
-                $find_parent = File::where('id', $element[0]['parent'])->get()->toArray();
-                if($find_parent == null) {
+                $find_parent_id = File::where('id', $element[0]['parent_id'])->get()->toArray();
+                if($find_parent_id == null) {
                     break;
                 }
-                $path = $find_parent[0]['name'];
+                $path = $find_parent_id[0]['name'];
                 $path_add_file = $path."/".$path_add_file;
-            }while($find_parent != null);
+            }while($find_parent_id != null);
         }
         $file->name = $fileUpload->getClientOriginalName();
         $file->extension = $fileUpload->getClientOriginalExtension();
@@ -46,10 +46,10 @@ class FileController extends Controller
         $file->path = $uploaded_path;
         $file->url = $url;
         if($request->path == null)
-            $file->parent = null;
+            $file->parent_id = null;
         else {
             $element = File::where('name', $request->path)->get()->toArray();
-            $file->parent = $element[0]['id'];
+            $file->parent_id = $element[0]['id'];
         }
         $file->save();
         
@@ -62,10 +62,10 @@ class FileController extends Controller
         $file->url = route('home')."/".$request->project;
         $file->extension = "folder";
         if($request->path == null)
-            $file->parent = null;
+            $file->parent_id = null;
         else {
             $element = File::where('name', $request->path)->get()->toArray();
-            $file->parent = $element[0]['id'];
+            $file->parent_id = $element[0]['id'];
         }
         $file->save();
 
@@ -89,13 +89,13 @@ class FileController extends Controller
         if($path_add_file != null) {
             do {
                 $element = File::where('name', $path)->get()->toArray();
-                $find_parent = File::where('id', $element[0]['parent'])->get()->toArray();
-                if($find_parent == null) {
+                $find_parent_id = File::where('id', $element[0]['parent_id'])->get()->toArray();
+                if($find_parent_id == null) {
                     break;
                 }
-                $path = $find_parent[0]['name'];
+                $path = $find_parent_id[0]['name'];
                 $path_add_file = $path."/".$path_add_file;
-            }while($find_parent != null);
+            }while($find_parent_id != null);
         }
         $file->name = $fileUpload->getClientOriginalName();
         $file->extension = $fileUpload->getClientOriginalExtension();
@@ -104,10 +104,10 @@ class FileController extends Controller
         $file->path = $uploaded_path;
         $file->url = $url;
         if($request->path == null)
-            $file->parent = null;
+            $file->parent_id = null;
         else {
             $element = File::where('name', $request->path)->get()->toArray();
-            $file->parent = $element[0]['id'];
+            $file->parent_id = $element[0]['id'];
         }
         $file->save();
         return redirect()->route('home');
@@ -129,7 +129,7 @@ class FileController extends Controller
     }
 
     public function deleteProject($id) {
-        $files = File::where('parent', $id)->get()->toArray();
+        $files = File::where('parent_id', $id)->get()->toArray();
         $this->deleteFolder($files);
         File::find($id)->delete();
         return redirect()->route('home');
@@ -141,7 +141,7 @@ class FileController extends Controller
                 Storage::disk('spaces')->delete($file['path']);
                 File::find($file['id'])->delete();
             } else {
-                $f = File::where('parent', $file['id'])->get()->toArray();
+                $f = File::where('parent_id', $file['id'])->get()->toArray();
                 if($f != null)
                     $this->deleteFolder($f);
                 File::find($file['id'])->delete();

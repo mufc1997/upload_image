@@ -15,11 +15,11 @@ class HomeController extends Controller
     public function index($project = null)
     {   
         if(!$project) {
-            $files = File::whereNull('parent')->get();
+            $files = File::whereNull('parent_id')->get();
             return view('home', compact("files"));  
         } else {
             $find = File::where('name', $project)->get()->toArray();
-            $files = File::where('parent', $find[0]['id'])->get();
+            $files = File::where('parent_id', $find[0]['id'])->get();
             return view('home', compact("files"));
         }
     }

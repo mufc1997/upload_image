@@ -15,8 +15,8 @@ class CreateFilesTable extends Migration
             $table->string('extension', 10);
             $table->text('url');
             $table->text('path')->nullable();
-            $table->integer('parent')->nullable();
-            $table->foreign('parent')->references('id')->on('files');
+            $table->integer('parent_id')->nullable();
+            $table->foreign('parent_id')->references('id')->on('files');
             
         });
     }
