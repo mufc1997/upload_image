@@ -23,5 +23,7 @@ Route::post('/edit/{file_id}', 'FileController@edit')->name('edit');
 Route::post('/editProject/{project_id}', 'FileController@editProject')->name('editProject');
 Route::post('/admin/change', 'UserController@change')->name('change');
 Route::get('/admin', 'UserController@index')->name('admin');
+Route::get('/getData/{id}', 'FileController@getData')->name('getData');
+
 
 

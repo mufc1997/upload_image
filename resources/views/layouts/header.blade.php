@@ -26,9 +26,10 @@
                         <form class="form-add-project d-flex flex-column justify-content-center" id="fileForm" action="{{ route('upload') }}" enctype="multipart/form-data" method="post">
                             {{ csrf_field() }}
                             <input type="text" value="{{ $project }}" name="path" hidden>
+                            <input type="text" name="name" id="fileNameInput" require>
                             <div class="form-group">
                                 <label for="exampleFormControlFile1">File input</label>
-                                <input type="file" class="form-control-file" id="exampleFormControlFile1" name="file" require>
+                                <input type="file" class="form-control-file" id="exampleFormControlFile1" name="file">
                                 <button type="submit" class="btn btn-primary border-hidden" style="margin-top: 20px; width: 100%;">Submit</button>
                             </div>
                         </form>

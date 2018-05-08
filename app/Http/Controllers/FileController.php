@@ -39,7 +39,7 @@ class FileController extends Controller
                 $path_add_file = $path."/".$path_add_file;
             }while($find_parent_id != null);
         }
-        $file->name = $fileUpload->getClientOriginalName();
+        $file->name = $request->name;
         $file->extension = $fileUpload->getClientOriginalExtension();
         $uploaded_path = Storage::disk('spaces')->putFile($path_add_file, $request->file, 'public');
         $url = Storage::disk('spaces')->url($uploaded_path); 
@@ -52,8 +52,7 @@ class FileController extends Controller
             $file->parent_id = $element[0]['id'];
         }
         $file->save();
-        
-        return redirect()->route('home');
+        return redirect(route('home')."/".$request->path);
     }
 
     public function addProject(Request $request, $project = null) {
@@ -68,16 +67,19 @@ class FileController extends Controller
             $file->parent_id = $element[0]['id'];
         }
         $file->save();
-
-        return redirect()->route('home');
+        return redirect(route('home')."/".$request->path);
     }
 
     public function edit(Request $request, $id) {
         $request->validate([
-            'file' => 'required|file',
+            'file' => 'file',
         ]);
-
         $file = File::find($id);
+        if(!$request->file('file')) {
+            $file->name = $request->name;
+            $file->save();
+            return redirect(route('home')."/".$request->path);
+        }
         Storage::disk('spaces')->delete($file->path);
         $request->validate([
             'file' => 'required|file',
@@ -97,7 +99,7 @@ class FileController extends Controller
                 $path_add_file = $path."/".$path_add_file;
             }while($find_parent_id != null);
         }
-        $file->name = $fileUpload->getClientOriginalName();
+        $file->name = $request->name;
         $file->extension = $fileUpload->getClientOriginalExtension();
         $uploaded_path = Storage::disk('spaces')->putFile($path_add_file, $request->file, 'public');
         $url = Storage::disk('spaces')->url($uploaded_path); 
@@ -110,7 +112,7 @@ class FileController extends Controller
             $file->parent_id = $element[0]['id'];
         }
         $file->save();
-        return redirect()->route('home');
+        return redirect(route('home')."/".$request->path);
     }
 
     public function editProject(Request $request, $id) {
@@ -118,7 +120,7 @@ class FileController extends Controller
         $project->name = $request->project;
         $project->url = route('home')."/".$request->project;
         $project->save();
-        return redirect()->route('home');
+        return redirect(route('home')."/".$request->path);
     }
 
     public function delete($id) {
@@ -147,5 +149,10 @@ class FileController extends Controller
                 File::find($file['id'])->delete();
             }
         }
+    }
+
+    public function getData($id) {
+        $file = File::find($id);
+        return response()->json($file);
     }
 }
