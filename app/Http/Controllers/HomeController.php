@@ -15,7 +15,7 @@ class HomeController extends Controller
     public function index($project = null)
     {   
         if(!$project) {
-            $path = "/Home/";
+            $path = "Home/";
             $files = File::whereNull('parent_id')->get();
             return view('home', compact("files", "path"));  
         } else {
@@ -35,7 +35,7 @@ class HomeController extends Controller
                     $path_add_file = $path."/".$path_add_file;
                 }while($find_parent_id != null);
             }
-            $path = "/Home/".$path_add_file;
+            $path = "Home/".$path_add_file;
             $files = File::whereNull('parent_id')->get();
             $find = File::where('name', $project)->get()->toArray();
             if(!$find) {
