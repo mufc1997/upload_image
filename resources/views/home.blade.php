@@ -10,6 +10,26 @@
 @endsection
 
 @section('content')
+<div class="breadcrumb">
+    <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <?php 
+            if($path) {
+                $arr = explode("/", $path);
+                $url = route('home');
+                foreach($arr as $el) {
+                    if($el != "Home")
+                        echo "<li class='breadcrumb-item'><a href='".$url."/".$el."'>".$el."</a></li>";
+                    else 
+                        echo "<li class='breadcrumb-item'><a href='".$url."'>".$el."</a></li>";
+                }
+            } else {
+                redirect()->route('home');
+            }
+        ?>
+    </ol>
+    </nav>
+</div>
 <div class="table-wrap">
         <table id="example" class="table table-striped table-bordered" style="width:100%">
             <thead>

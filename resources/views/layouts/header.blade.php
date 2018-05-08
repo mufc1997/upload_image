@@ -6,9 +6,17 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <!-- Button trigger modal -->
+        <?php 
+            $url_arr = explode("/", url()->current());
+            $project = $url_arr[count($url_arr) - 1];
+            if($project == $url_arr[2])
+                $project = null;
+        ?>
+        @if ($project != null)
         <button type="button" class="btn btn-primary border-hidden add-button" data-toggle="modal" data-target="#fileModal" onClick="uploadFile();">
             Add File
         </button>
+        @endif
 
         <!-- Modal -->
         <div class="modal fade" id="fileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -17,14 +25,7 @@
                     <article class="d-flex justify-content-center">
                         <form class="form-add-project d-flex flex-column justify-content-center" id="fileForm" action="{{ route('upload') }}" enctype="multipart/form-data" method="post">
                             {{ csrf_field() }}
-                            <?php 
-                                $url_arr = explode("/", url()->current());
-                                $project = $url_arr[count($url_arr) - 1];
-                                if($project == $url_arr[2])
-                                    $project = null;
-                            ?>
                             <input type="text" value="{{ $project }}" name="path" hidden>
-                            
                             <div class="form-group">
                                 <label for="exampleFormControlFile1">File input</label>
                                 <input type="file" class="form-control-file" id="exampleFormControlFile1" name="file" require>
@@ -48,12 +49,6 @@
                     <article class="d-flex justify-content-center">
                         <form class="form-add-project d-flex flex-column justify-content-center " id="projectForm" action="{{ route('project') }}" method="post">
                             {{ csrf_field() }}
-                            <?php 
-                                $url_arr = explode("/", url()->current());
-                                $project = $url_arr[count($url_arr) - 1];
-                                if($project == $url_arr[2])
-                                    $project = null;
-                            ?>
                             <input type="text" value="{{ $project }}" name="path" hidden>
                             <div class="form-group">
                                 <label for="exampleFormControlFile1">Name project</label>
